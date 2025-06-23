@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "fontdrop": "./bin/cli.js"
+    "fontdrop": "./cli.js"
   },
   "type": "module",
   "keywords": [],
@@ -17,7 +17,9 @@
     "axios": "^1.10.0",
     "chalk": "^5.4.1",
     "commander": "^14.0.0",
-    "ora": "^8.2.0"
+    "inquirer": "^12.6.3",
+    "ora": "^8.2.0",
+    "readline-sync": "^1.4.10"
   },
   "devDependencies": {
     "prettier": "^3.5.3"
