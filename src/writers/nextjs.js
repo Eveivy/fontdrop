@@ -1,3 +1,4 @@
+import { toForwardSlash } from '../utils/index.js';
 import fs from "fs-extra";
 import path from "path";
 
@@ -21,7 +22,7 @@ export async function writeNextjs({ fontData, outputPath, resolvedOutput, downlo
   console.log(`\n  Next.js font setup complete.`);
   console.log(`\n  Using App Router (Next.js 13+)?`);
   console.log(`  Import your font config in app/layout.js:\n`);
-  console.log(`    import { ${familyCamel} } from '${path.join(outputPath, "fontConfig.js")}';`);
+  console.log(`    import { ${familyCamel} } from '${toForwardSlash(path.join(outputPath, "fontConfig.js"))}';`);
   console.log(`    export default function RootLayout({ children }) {`);
   console.log(`      return (`);
   console.log(`        <html lang="en" className={${familyCamel}.variable}>`);
@@ -33,7 +34,7 @@ export async function writeNextjs({ fontData, outputPath, resolvedOutput, downlo
   console.log(`    body { font-family: var(--font-${familySlug}); }\n`);
   console.log(`  Using Pages Router?`);
   console.log(`  Import the fallback CSS in _app.js instead:`);
-  console.log(`    import '${path.join(outputPath, "fonts.css")}';\n`);
+  console.log(`    import '${toForwardSlash(path.join(outputPath, "fonts.css"))}';\n`);
 }
 
 async function writeFontConfig({ fontData, outputPath, resolvedOutput, downloadedFiles, familySlug, familyCamel }) {
@@ -66,7 +67,7 @@ async function writeFallbackCSS({ fontData, resolvedOutput, downloadedFiles, fam
   for (const file of downloadedFiles) {
     cssLines.push(`@font-face {`);
     cssLines.push(`  font-family: '${fontData.family}';`);
-    cssLines.push(`  src: url('/${path.join("fonts", file.fileName)}') format('${file.format}');`);
+    cssLines.push(`  src: url('/${toForwardSlash(path.join("fonts", file.fileName))}') format('${file.format}');`);
     cssLines.push(`  font-weight: ${file.weight};`);
     cssLines.push(`  font-style: normal;`);
     cssLines.push(`  font-display: swap;`);
@@ -101,3 +102,4 @@ function toCamelCase(str) {
     )
     .replace(/\s+/g, "");
 }
+

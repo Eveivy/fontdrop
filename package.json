@@ -1,7 +1,7 @@
 {
   "name": "font-drop",
   "version": "1.0.0",
-  "description": "A CLI tool that sets up fonts in your frontend project — download, configure, and wire up in seconds.",
+  "description": "A CLI tool that sets up fonts in your frontend project — search, download, and wire up in seconds.",
   "type": "module",
   "main": "src/index.js",
   "bin": {
@@ -27,8 +27,30 @@
     "google-fonts",
     "nextjs",
     "react",
-    "css"
+    "css",
+    "webfonts",
+    "typography",
+    "font-download",
+    "developer-tools"
   ],
-  "author": "",
-  "license": "MIT"
+  "author": {
+    "name": "Evelyn Isaac",
+    "url": "https://github.com/Eveivy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Eveivy/font-drop"
+  },
+  "homepage": "https://github.com/Eveivy/font-drop#readme",
+  "bugs": {
+    "url": "https://github.com/Eveivy/font-drop/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "src",
+    "README.md"
+  ]
 }

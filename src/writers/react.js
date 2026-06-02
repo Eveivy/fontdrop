@@ -1,3 +1,4 @@
+import { toForwardSlash } from '../utils/index.js';
 import fs from "fs-extra";
 import path from "path";
 
@@ -13,7 +14,7 @@ export async function writeReact({ fontData, outputPath, resolvedOutput, downloa
   if (cssDestination === "new") {
     await writeGlobalFontCSS({ fontData, resolvedOutput, downloadedFiles, familySlug });
     console.log(`\n  Import the stylesheet once in your entry file (main.jsx / index.jsx):`);
-    console.log(`\n    import '${path.join(outputPath, "fonts.css")}';`);
+    console.log(`\n    import '${toForwardSlash(path.join(outputPath, "fonts.css"))}';`);
   } else if (cssDestination === "existing" && existingCssPath) {
     await appendToExistingCSS({ fontData, resolvedOutput, downloadedFiles, familySlug, existingCssPath, outputPath });
     console.log(`\n  Font styles appended to: ${chalk_path(existingCssPath)}`);
@@ -25,7 +26,7 @@ export async function writeReact({ fontData, outputPath, resolvedOutput, downloa
   if (generateHelper) {
     await writeFontHelper({ fontData, resolvedOutput, downloadedFiles, familySlug });
     console.log(`\n  Or use the font variables from the helper:`);
-    console.log(`\n    import { fontFamily } from '${path.join(outputPath, "fontHelper.js")}';`);
+    console.log(`\n    import { fontFamily } from '${toForwardSlash(path.join(outputPath, "fontHelper.js"))}';`);
     console.log(`    <p style={{ fontFamily: fontFamily }}>Hello World</p>`);
   }
 
@@ -41,7 +42,7 @@ async function writeGlobalFontCSS({ fontData, resolvedOutput, downloadedFiles, f
 async function appendToExistingCSS({ fontData, resolvedOutput, downloadedFiles, familySlug, existingCssPath, outputPath }) {
   // Calculate relative path from the existing CSS file to the fonts folder
   const cssDir = path.dirname(existingCssPath);
-  const relativePrefix = path.relative(cssDir, resolvedOutput).replace(/\\/g, "/") + "/";
+  const relativePrefix = toForwardSlash(path.relative(cssDir, resolvedOutput)) + "/";
 
   const cssLines = generateFontCSS({ fontData, downloadedFiles, familySlug, urlPrefix: relativePrefix });
   const separator = `\n\n/* ── font-drop: ${fontData.family} ── */\n`;
@@ -116,3 +117,8 @@ async function writeFontHelper({ fontData, resolvedOutput, downloadedFiles, fami
 function chalk_path(p) {
   return p; // plain path for now, chalk not imported here
 }
+
+
+
+
+

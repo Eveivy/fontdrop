@@ -49,3 +49,18 @@ export function weightLabel(weight) {
   };
   return labels[parseInt(weight)] || `W${weight}`;
 }
+
+/**
+ * Join paths and always return forward slashes (safe for CSS/HTML/JS)
+ */
+export function joinPath(...parts) {
+  return parts.join("/").replace(/\/+/g, "/");
+}
+
+/**
+ * Convert any path to forward slashes
+ */
+export function toForwardSlash(p) {
+  return p.replace(/\\/g, "/");
+}
+ 
